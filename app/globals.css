@@ -1,26 +1,147 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   G&M REPARACIONES — Design Tokens (Tailwind v4 @theme)
+   ============================================================ */
+
+@theme {
+  /* Brand colors */
+  --color-gm-black:      #0A0A0A;
+  --color-gm-dark:       #141414;
+  --color-gm-card:       #1A1A1A;
+  --color-gm-border:     #2A2A2A;
+  --color-gm-cyan:       #29ABE2;
+  --color-gm-cyan-dark:  #1BA7DE;
+  --color-gm-orange:     #F7931E;
+  --color-gm-red:        #E8431F;
+  --color-gm-light:      #F5F5F5;
+  --color-gm-muted:      #999999;
+  --color-gm-text:       #E5E5E5;
+
+  /* Fonts */
+  --font-heading: var(--font-outfit), "Outfit", sans-serif;
+  --font-body:    var(--font-work-sans), "Work Sans", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ============================================================
+   Base Styles
+   ============================================================ */
+
+body {
+  background-color: var(--color-gm-black);
+  color: var(--color-gm-text);
+  font-family: var(--font-body);
+  min-height: 100vh;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* ============================================================
+   Accessibility
+   ============================================================ */
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-gm-cyan);
+  color: #000;
+  padding: 8px 16px;
+  z-index: 9999;
+  font-weight: 600;
+  border-radius: 0 0 6px 0;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid var(--color-gm-cyan);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ============================================================
+   Smooth scroll — respect reduced motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================
+   Scrollbar
+   ============================================================ */
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-gm-black); }
+::-webkit-scrollbar-thumb { background: var(--color-gm-border); border-radius: 3px; }
+
+/* ============================================================
+   Utility classes
+   ============================================================ */
+
+/* Gradient divider — cold left, hot right */
+.gradient-divider {
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-gm-cyan) 0%,
+    var(--color-gm-cyan-dark) 40%,
+    var(--color-gm-orange) 60%,
+    var(--color-gm-red) 100%
+  );
+}
+
+/* GSAP initial states */
+.gsap-fade-up {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+/* will-change hints for animated elements */
+.will-animate {
+  will-change: transform, opacity;
+}
+
+/* Hero split gradient */
+.hero-split-bg {
+  background: linear-gradient(
+    135deg,
+    #0A0A0A 0%,
+    #0D1A22 30%,
+    #150D00 70%,
+    #0A0A0A 100%
+  );
+}
+
+/* Cold glow */
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(41, 171, 226, 0.25);
+}
+
+/* Hot glow */
+.glow-orange {
+  box-shadow: 0 0 20px rgba(247, 147, 30, 0.25);
+}
+
+/* Section light */
+.section-light {
+  background-color: var(--color-gm-light);
+  color: var(--color-gm-black);
+}
+
+/* ============================================================
+   Cookie banner — z-index layer
+   ============================================================ */
+
+#cookie-banner {
+  z-index: 9000;
 }
